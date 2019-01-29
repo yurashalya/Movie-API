@@ -1,0 +1,44 @@
+.Grid h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size:42px;
+}
+  
+.Grid_content {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+  
+.Grid_element {
+    margin: 0 40px 40px 0;
+    background: #353535;
+    max-height: 430px;
+    animation: animateGrid 0.5s;
+    overflow: hidden;
+}
+  
+@keyframes animateGrid {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+  
+.Grid_element:nth-child(4n+4) {
+    margin-right: 0;
+}
+  
+@media screen and (max-width: 720px) {
+    .Grid_content {
+      grid-template-columns: auto auto;
+    }
+  
+    .Grid_element:nth-child(2n+2) {
+      margin-right: 0;
+    }
+  
+    .Grid h1 {
+      font-size:22px;
+    }
+}
