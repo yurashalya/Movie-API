@@ -1,0 +1,47 @@
+.Header {
+    width: 100%;
+    height: auto;
+    background: #1c1c1c;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+  
+.Header_content {
+    max-width: 1280px;
+    min-height: 120px;
+    height: auto;
+    padding: 20px 0px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+  
+.Logo {
+    width: 250px;
+    margin-top: 10px;
+    float: left;
+}
+  
+.Logos {
+    width: 80px;  
+    margin-top: 10px; 
+    float: right;
+}
+  
+@media screen and (max-width: 500px) {
+    .Header_content {
+        max-width: 1280px;
+        min-height: 0px;
+    }
+
+    .Logos {
+        display: inline-block;
+        width:80px;
+        margin-top: 0px;
+    }
+
+    .Logo {
+        width: 150px;
+        margin-top: 5px;
+    }
+}
