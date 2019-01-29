@@ -8,10 +8,50 @@ import MovieWatch from '../component/MovieWatch/MovieWatch';
 import LoaderBtn from '../component/LoaderBtn/LoaderBtn';
 import Spinner from '../component/Spinner/Spinner';
 
+import { API_URL, API_KEY, IMAGE_URL, POSTERS_SIZE } from '../../Configs/Configs';
+
 
 class Home extends Component {
     state = {
+        movies: [],
+        heroImage: null,
+        loading: false,
+        currentPage: 0,
+        totalPages: 0,
+        search: ''
+    }
 
+    componentDidMount () {
+        this.setState({loading: true});
+        const point =  `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        this.fetchItems(point);
+    }
+
+    loadingItems = () => {
+        let point = '';
+        this.setState({loading: true});
+
+        if(this.state.search === '') {
+            point = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.currentPage + 1}`
+        } else {
+            point = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${this.state.search}&page=${this.state.currentPage + 1}`;
+        }
+
+        this.fetchItems(point);
+    }
+
+    fetchItems = (point) => {
+        fetch(point)
+        .then (result => result.json())
+        .then (result => {
+            this.setState({
+                movies: [...this.state.movies, ...result.results],
+                heroImage: this.state.heroImage ||  result.results[0],
+                loading: false,
+                currentPage: result.page,
+                totalPages: result.total_pages
+            })
+        })
     }
 
     render() {
