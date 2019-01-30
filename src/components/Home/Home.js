@@ -9,6 +9,7 @@ import LoaderBtn from '../component/LoaderBtn/LoaderBtn';
 import Spinner from '../component/Spinner/Spinner';
 
 import { API_URL, API_KEY, IMAGE_URL, POSTERS_SIZE, BACK_SIZE } from '../../Configs/Configs';
+import notImage from '../../assets/images/noimg.jpg'
 
 
 class Home extends Component {
@@ -82,8 +83,22 @@ class Home extends Component {
                         />
                         <Search callback={this.searchItems} />
                     </div> : null }
-               
-                <ColsGrid />
+
+                <div className={classes.Home_Grid} >
+                    <ColsGrid 
+                        header={this.state.searchItems ? 'Search Result' : 'Popular Movies'}
+                        loading={this.state.loading}
+                    >
+                    {this.state.movies.map((element, i) => {
+                        return <MovieWatch key={i} clicked={true} 
+                            image= {element.poster_path ? `${IMAGE_URL}${POSTERS_SIZE}${element.poster_path}` : notImage}
+                            movieId = {element.id}
+                            movie = {element.original_title}
+                            />
+                        })}
+                    </ColsGrid>
+                </div>
+                
                 <Spinner />
                 <LoaderBtn />
             </div>
