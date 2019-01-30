@@ -3,6 +3,7 @@ const API_KEY = 'bc99ef0b6ee2f96a28fe5b77cea4e930';
 
 
 const IMAGE_URL ='http://image.tmdb.org/t/p/';
+
 const BACK_SIZE = 'w1280';
 const POSTERS_SIZE = 'w500';
 

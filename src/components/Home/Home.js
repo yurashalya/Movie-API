@@ -8,7 +8,7 @@ import MovieWatch from '../component/MovieWatch/MovieWatch';
 import LoaderBtn from '../component/LoaderBtn/LoaderBtn';
 import Spinner from '../component/Spinner/Spinner';
 
-import { API_URL, API_KEY, IMAGE_URL, POSTERS_SIZE } from '../../Configs/Configs';
+import { API_URL, API_KEY, IMAGE_URL, POSTERS_SIZE, BACK_SIZE } from '../../Configs/Configs';
 
 
 class Home extends Component {
@@ -32,13 +32,29 @@ class Home extends Component {
         this.setState({loading: true});
 
         if(this.state.search === '') {
-            point = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.currentPage + 1}`
+            point = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.currentPage + 1}`;
         } else {
-            point = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${this.state.search}&page=${this.state.currentPage + 1}`;
+            point = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=${this.state.currentPage + 1}`;
         }
 
         this.fetchItems(point);
     }
+
+    searchItems = (searchTerm) => {
+        let point = '';
+        this.setState({
+          movies: [],
+          loading: true,
+          search: ''
+        })
+
+        if (searchTerm === "") {
+          point = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        } else {
+          point = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`;
+        }
+        this.fetchItems(point);
+      }
 
     fetchItems = (point) => {
         fetch(point)
@@ -57,8 +73,16 @@ class Home extends Component {
     render() {
         return (
             <div className={classes.Home}>
-                <Hero />
-                <Search />
+                {this.state.heroImage ?
+                    <div>
+                        <Hero
+                            image={`${IMAGE_URL}${BACK_SIZE}${this.state.heroImage.backdrop_path}`}
+                            title={this.state.heroImage.original_title}
+                            text={this.state.heroImage.overview}
+                        />
+                        <Search callback={this.searchItems} />
+                    </div> : null }
+               
                 <ColsGrid />
                 <Spinner />
                 <LoaderBtn />

@@ -19,7 +19,7 @@
     color: #fff;
 }
   
-.fa-search {
+.fa_search {
     position: absolute;
     left: 20px;
     top: 12px;
@@ -28,7 +28,7 @@
   
 .Search_input {
     font-family: 'Roboto', sans-serif;
-    font-size: 38px;
+    font-size: 30px;
     position: absolute;
     left: 70px;
     top: 7px;
