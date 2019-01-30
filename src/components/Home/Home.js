@@ -72,24 +72,27 @@ class Home extends Component {
     }
 
     render() {
+         // ES6 Destructuring the state
+        const { movies, heroImage, loading, currentPage, totalPages, searchItems } = this.state;
+
         return (
             <div className={classes.Home}>
-                {this.state.heroImage ?
+                {heroImage ?
                     <div>
                         <Hero
-                            image={`${IMAGE_URL}${BACK_SIZE}${this.state.heroImage.backdrop_path}`}
-                            title={this.state.heroImage.original_title}
-                            text={this.state.heroImage.overview}
+                            image={`${IMAGE_URL}${BACK_SIZE}${heroImage.backdrop_path}`}
+                            title={heroImage.original_title}
+                            text={heroImage.overview}
                         />
                         <Search callback={this.searchItems} />
                     </div> : null }
 
                 <div className={classes.Home_Grid} >
                     <ColsGrid 
-                        header={this.state.searchItems ? 'Search Result' : 'Popular Movies'}
-                        loading={this.state.loading}
+                        header={searchItems ? 'Search Result' : 'Popular Movies'}
+                        loading={loading}
                     >
-                    {this.state.movies.map((element, i) => {
+                    {movies.map((element, i) => {
                         return <MovieWatch key={i} clicked={true} 
                             image= {element.poster_path ? `${IMAGE_URL}${POSTERS_SIZE}${element.poster_path}` : notImage}
                             movieId = {element.id}
@@ -97,8 +100,8 @@ class Home extends Component {
                             />
                         })}
                     </ColsGrid>
-                    {this.state.loading ? <Spinner /> : null }
-                    {(this.state.currentPage <= this.state.totalPages && !this.state.loading) ?
+                    {loading ? <Spinner /> : null }
+                    {(currentPage <= totalPages && !loading) ?
                         <LoaderBtn text="Load More" onClick={this.loadingItems} />
                         : null
                     }

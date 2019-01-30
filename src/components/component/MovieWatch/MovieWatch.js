@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classes from './MovieWatch.module.css';
 
-const MovieWatch = (props) => {
+const MovieWatch = ({ image, movieId, movieName, clicked }) => {
     return (
         <div className ={classes.Movie_watch}>
-            {props.clicked ? 
-            <Link to = {{pathname: `/${props.movieId}`, movieName: `${props.movieName}`}} >
-                <img className={classes.clicked} src={props.image} alt="Movie" />
+            {clicked ? 
+            <Link to = {{pathname: `/${movieId}`, movieName: `${movieName}`}} >
+                <img className={classes.clicked} src={image} alt="Movie" />
             </Link>
             :
-                <img className={classes.clicked} src={props.image} alt="Movie" /> 
+                <img className={classes.clicked} src={image} alt="Movie" /> 
             }
         </div>
     );
