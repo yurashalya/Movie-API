@@ -9,7 +9,7 @@ import LoaderBtn from '../component/LoaderBtn/LoaderBtn';
 import Spinner from '../component/Spinner/Spinner';
 
 import { API_URL, API_KEY, IMAGE_URL, POSTERS_SIZE, BACK_SIZE } from '../../Configs/Configs';
-import notImage from '../../assets/images/noimg.jpg'
+import notImage from '../../assets/images/noimg.jpg';
 
 
 class Home extends Component {

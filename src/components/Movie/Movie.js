@@ -3,6 +3,7 @@ import  { API_URL, API_KEY } from '../../Configs/Configs';
 import Nav from '../component/Nav/Nav';
 import MovieInfo from '../component/MovieInfo/MovieInfo';
 import ColsGrid from '../component/ColsGrid/ColsGrid';
+import MovieBars from '../component/MovieBars/MovieBars';
 import Actors from '../component/Actors/Actors';
 import Spinner from '../component/Spinner/Spinner';
 
@@ -20,11 +21,14 @@ class Movie extends Component {
     componentDidMount() {
           this.setState({ loading: true })
           
-          let point = `${API_URL}movie/${this.props.match.params.movieId}?api_key=${API_KEY}&language=en-US`;
-          this.fetchItems(point)
+          const point = `${API_URL}movie/${this.props.match.params.movieId}?api_key=${API_KEY}&language=en-US`;
+          this.fetchItems(point);
         }
 
     fetchItems = (point) => {
+        //ES 6 
+        const { movieId } = this.props.match.params;
+
         fetch(point)
         .then(result => result.json())
         .then(result =>  {
@@ -32,7 +36,7 @@ class Movie extends Component {
                 this.setState({ loading: false });
             } else {
                 this.setState({ movie: result }, () => {
-                    let point = `${API_URL}movie/${this.props.match.params.movieId}/credits?api_key=${API_KEY}`;
+                    let point = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
                     fetch(point)
                     .then(result => result.json())
                     .then(result => {
@@ -52,13 +56,30 @@ class Movie extends Component {
     
 
     render() {
-        return(
+        const { movieName } = this.props.location;
+        const { movie, directors, actors, loading } = this.state;
+
+        return (
             <div className={classes.Movie}>
-                <Nav />
-                <MovieInfo />
-                <MovieInfo />
-                {/* <ColsGrid /> */}
-                <Spinner />
+                {movie ?
+                    <div>
+                        <Nav  movie={movieName} />
+                        <MovieInfo movie={movie} directors={directors} />
+                        <MovieBars time={movie.runtime} 
+                        budget={movie.budget} revenue={movie.revenue}  />
+                    </div>
+                : null }
+                {actors ? 
+                    <div className={classes.Movie_grid}>
+                        <ColsGrid header={'Actors'} >
+                        {actors.map( (element, i) => (
+                            <Actors key={i} actor={element} />
+                        ))}
+                        </ColsGrid>
+                    </div>
+                    : null }
+                {!actors && !loading ? <h1>No Movie Found</h1> : null}
+                {loading ? <Spinner /> : null}
             </div>
         );
     }

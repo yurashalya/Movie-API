@@ -6,11 +6,13 @@ const IMAGE_URL ='http://image.tmdb.org/t/p/';
 
 const BACK_SIZE = 'w1280';
 const POSTERS_SIZE = 'w500';
+const POSTER = 'w154';
 
 export {
   API_URL,
   API_KEY,
   IMAGE_URL,
   BACK_SIZE,
-  POSTERS_SIZE
+  POSTERS_SIZE,
+  POSTER
 }

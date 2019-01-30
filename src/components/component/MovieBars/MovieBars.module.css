@@ -16,7 +16,7 @@
     color: #fff;
 }
   
-.Movie_bars-content_col {
+.Movie_bars_content_col {
     float: left;
     width: 33.33%;
     box-sizing: border-box;
@@ -28,12 +28,12 @@
     float: left;
   }
   
-.fa-time, .fa-revenue {
+.fa_time, .fa_revenue {
     float: left;
     margin-top: -4px;
 }
   
-.fa-budget {
+.fa_budget {
     float: left;
     margin-top: -3px;
 }
