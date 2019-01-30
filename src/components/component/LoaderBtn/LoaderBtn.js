@@ -3,7 +3,10 @@ import classes from './LoaderBtn.module.css';
 
 const LoaderBtn = (props) => {
     return (
-        <div>Load</div>
+        <div 
+            className={classes.Loader_btn} 
+            onClick={props.onClick}
+        ><p>{props.text}</p></div>
     );
 }
 

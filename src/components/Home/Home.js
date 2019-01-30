@@ -97,10 +97,14 @@ class Home extends Component {
                             />
                         })}
                     </ColsGrid>
+                    {this.state.loading ? <Spinner /> : null }
+                    {(this.state.currentPage <= this.state.totalPages && !this.state.loading) ?
+                        <LoaderBtn text="Load More" onClick={this.loadingItems} />
+                        : null
+                    }
                 </div>
                 
-                <Spinner />
-                <LoaderBtn />
+                
             </div>
         );
     }
