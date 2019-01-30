@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './ColsGrid.module.css';
 
 
@@ -23,6 +24,10 @@ const ColsGrid = (props) => {
     );
 }
 
+ColsGrid.propTypes = {
+    header: PropTypes.string,
+    loading: PropTypes.bool
+}
 
 
 export default ColsGrid;

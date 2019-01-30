@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import classes from './MovieWatch.module.css';
 
 const MovieWatch = (props) => {
@@ -15,5 +16,12 @@ const MovieWatch = (props) => {
         </div>
     );
 }
+
+MovieWatch.propTypes = {
+    image: PropTypes.string,
+    movieId: PropTypes.number,
+    movieName: PropTypes.string,
+    clickable: PropTypes.bool
+  }
 
 export default MovieWatch;
