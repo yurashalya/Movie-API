@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+
 import Header from './components/component/Head/Head';
 import Home from './components/Home/Home';
+import NotFound from './components/component/NotFound/NotFound';
+import Movie from './components/Movie/Movie'
 
 
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <BrowserRouter>
+        <React.Fragment> 
           <Header />
-          <Home />
-      </div>
+          <Switch>
+             <Route  path="/" component= {Home} exact />
+             <Route path="/:moveId" component= {Movie} exact />
+             <Route  component= {NotFound}  />
+          </Switch>
+        </React.Fragment>
+      </BrowserRouter>
+      // <div className="App">
+      //     <Header />
+      //     
+      // </div>
     );
   }
 }

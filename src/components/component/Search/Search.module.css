@@ -36,6 +36,7 @@
     background: transparent;
     height: 40px;
     color: #fff;
+    width: 700px;
 }
   
 .Search_input:focus {
